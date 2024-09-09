@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spreadsheet Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        select {
+            width: 100%;
+            padding: 5px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Enhanced Spreadsheet Table with Food Items</h1>
+
+    <table id="spreadsheet">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select>
+                        <option value="Apple">Apple</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Carrot">Carrot</option>
+                        <option value="Milk">Milk</option>
+                        <option value="Eggs">Eggs</option>
+                        <option value="Bread">Bread</option>
+                        <option value="Cheese">Cheese</option>
+                        <option value="Chicken">Chicken</option>
+                    </select>
+                </td>
+                <td>
+                    <select>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Protein">Protein</option>
+                    </select>
+                </td>
+                <td><input type="number" class="price" placeholder="Enter price"></td>
+                <td><input type="number" class="quantity" placeholder="Enter quantity"></td>
+                <td><span class="total-price">0</span></td>
+            </tr>
+            <tr>
+                <td>
+                    <select>
+                        <option value="Apple">Apple</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Carrot">Carrot</option>
+                        <option value="Milk">Milk</option>
+                        <option value="Eggs">Eggs</option>
+                        <option value="Bread">Bread</option>
+                        <option value="Cheese">Cheese</option>
+                        <option value="Chicken">Chicken</option>
+                    </select>
+                </td>
+                <td>
+                    <select>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Protein">Protein</option>
+                    </select>
+                </td>
+                <td><input type="number" class="price" placeholder="Enter price"></td>
+                <td><input type="number" class="quantity" placeholder="Enter quantity"></td>
+                <td><span class="total-price">0</span></td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+    <button id="calculate">Calculate Total Price</button>
+    <p id="grandTotal">Grand Total: $0</p>
+
+    <script>
+        // Function to calculate total price for each row and the grand total
+        document.getElementById('calculate').addEventListener('click', function () {
+            let grandTotal = 0;
+
+            // Get all the rows of the table body
+            const rows = document.querySelectorAll('#spreadsheet tbody tr');
+
+            // Loop through each row
+            rows.forEach(row => {
+                // Get price and quantity inputs
+                const priceInput = row.querySelector('.price').value;
+                const quantityInput = row.querySelector('.quantity').value;
+
+                // Convert to numbers (default is string)
+                const price = parseFloat(priceInput) || 0;
+                const quantity = parseInt(quantityInput) || 0;
+
+                // Calculate the total for this row
+                const totalPrice = price * quantity;
+
+                // Display the total price in the "Total Price" column
+                row.querySelector('.total-price').textContent = totalPrice.toFixed(2);
+
+                // Add to grand total
+                grandTotal += totalPrice;
+            });
+
+            // Display the grand total
+            document.getElementById('grandTotal').textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
+        });
+    </script>
+
+</body>
+</html>
